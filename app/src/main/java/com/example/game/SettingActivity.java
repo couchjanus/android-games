@@ -2,6 +2,7 @@ package com.example.game;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -29,5 +30,9 @@ public class SettingActivity extends AppCompatActivity {
 
     public void runGame(){
 
+        Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("name", name.getText().toString());
+        intent.putExtra("email", email.getText().toString());
+        startActivity(intent);
     }
 }
