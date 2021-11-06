@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:autofillHints="First Name"
             android:backgroundTint="#808080"
-            android:gravity="center"
+
             android:inputType="text"
             android:padding="10dp"
             android:textColor="#000000"
@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#808080"
-            android:gravity="center"
+
             android:autofillHints="Last Name"
             android:padding="10dp"
             android:textColor="#000000"
@@ -73,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#808080"
-            android:gravity="center"
+
             android:autofillHints="Email"
             android:inputType="textEmailAddress"
             android:padding="10dp"
@@ -91,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#808080"
-            android:gravity="center"
+
             android:autofillHints="Password"
             android:inputType="textPassword"
             android:padding="10dp"
@@ -110,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#808080"
-            android:gravity="center"
+
             android:autofillHints="Repeat Password"
             android:inputType="textPassword"
             android:padding="10dp"

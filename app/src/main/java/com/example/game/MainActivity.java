@@ -92,8 +92,6 @@ public class MainActivity extends AppCompatActivity {
             String resPassword = password.getText().toString();
             String resRepeatPassword = repeatPassword.getText().toString();
 
-
-
             Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
             // Here you can call you API
 

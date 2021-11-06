@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/qalight/AndroidStudioProjects/Game/app/src/main/res/layout/activity_game.xml" value="0.1" />
+        <entry key="..\:/Users/qalight/AndroidStudioProjects/Game/app/src/main/res/layout/activity_game.xml" value="0.25" />
         <entry key="..\:/Users/qalight/AndroidStudioProjects/Game/app/src/main/res/layout/activity_main.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/qalight/AndroidStudioProjects/Game/app/src/main/res/layout/activity_setting.xml" value="0.25" />
+        <entry key="..\:/Users/qalight/AndroidStudioProjects/Game/app/src/main/res/menu/games_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/qalight/AndroidStudioProjects/Game/app/src/main/res/menu/main_menu.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>
