@@ -35,6 +35,7 @@ public class GameActivity extends AppCompatActivity {
     int guessColor;
     int scoreYes = 0;
     int scoreNo = 0;
+    String name, email;
 
     public void displayResult(String result){
         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
@@ -61,7 +62,11 @@ public class GameActivity extends AppCompatActivity {
 
         TextView textHeader = findViewById(R.id.header);
         textHeader.setText("Чи співпадає назва кольору зліва з кольором техта зправа?");
-
+        Bundle arguments = getIntent().getExtras();
+        if (arguments!=null){
+            name = arguments.get("name").toString();
+            email = arguments.get("email").toString();
+        }
         run();
 
     }
@@ -89,6 +94,8 @@ public class GameActivity extends AppCompatActivity {
 //                        sendEmail();
 //                    }
 //                });
+
+
             }
         }.start();
     }
@@ -178,6 +185,15 @@ public class GameActivity extends AppCompatActivity {
             Toast.makeText(GameActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+
+    public void toResult(View v){
+
+        Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra("name", name.toString());
+        intent.putExtra("email", email.toString());
+        startActivity(intent);
     }
 
 

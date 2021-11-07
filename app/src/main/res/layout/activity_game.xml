@@ -80,5 +80,14 @@
         android:onClick="guessNo"
         android:text="No" />
 
+    <Button
+        android:id="@+id/toResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/noButton"
+        android:layout_alignParentRight="true"
+        android:text="Go to result"
+        android:onClick="toResult"
+        />
 
 </RelativeLayout>
