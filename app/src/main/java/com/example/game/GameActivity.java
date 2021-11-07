@@ -15,7 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +29,7 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
     private final static String SHAPEFILE = "game.txt";
 
-    private EditText helpBox;
+    private TextView helpBox;
 
     int currentColor;
     int guessColor;
@@ -57,35 +57,40 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        helpBox =  (EditText) findViewById(R.id.gameHelp);
+        helpBox =  (TextView) findViewById(R.id.gameHelp);
 
         TextView textHeader = findViewById(R.id.header);
         textHeader.setText("Чи співпадає назва кольору зліва з кольором техта зправа?");
+
+        run();
+
+    }
+
+    public void run(){
         TextView textViewRight = findViewById(R.id.textViewRight);
         TextView textViewLeft = findViewById(R.id.textViewLeft);
-        TextView textViewScore = findViewById(R.id.textViewScore);
+        //        TextView textViewScore = findViewById(R.id.textViewScore);
         Random rand = new Random();
         currentColor = Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
         textViewLeft.setBackgroundColor(currentColor);
 
         new CountDownTimer(60000,2000){
             public void onTick(long millisUntilFinished){
-                textViewRight.setText("seconds: " + millisUntilFinished / 2000);
+//                textViewRight.setText("seconds: " + millisUntilFinished / 2000);
                 guessColor = Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
                 textViewRight.setBackgroundColor(guessColor);
             }
             public void onFinish(){
-                textViewScore.setText("score yes: " + scoreYes + " score no: " + scoreNo);
+//                textViewScore.setText("score yes: " + scoreYes + " score no: " + scoreNo);
                 displayResult("All done: ");
-                Button startBtn = (Button) findViewById(R.id.sendEmail);
-                startBtn.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View view) {
-                        sendEmail();
-                    }
-                });
+//                Button startBtn = (Button) findViewById(R.id.sendEmail);
+//                startBtn.setOnClickListener(new View.OnClickListener() {
+//                    public void onClick(View view) {
+//                        sendEmail();
+//                    }
+//                });
             }
         }.start();
-
     }
 
     @Override
