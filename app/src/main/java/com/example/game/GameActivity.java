@@ -14,7 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+
 
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +36,7 @@ public class GameActivity extends AppCompatActivity {
     int scoreYes = 0;
     int scoreNo = 0;
     String name, email;
+    int rating = 0;
 
     public void displayResult(String result){
         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
@@ -58,7 +59,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        helpBox =  (TextView) findViewById(R.id.gameHelp);
+//        helpBox =  (TextView) findViewById(R.id.gameHelp);
 
         TextView textHeader = findViewById(R.id.header);
         textHeader.setText("Чи співпадає назва кольору зліва з кольором техта зправа?");
@@ -74,28 +75,19 @@ public class GameActivity extends AppCompatActivity {
     public void run(){
         TextView textViewRight = findViewById(R.id.textViewRight);
         TextView textViewLeft = findViewById(R.id.textViewLeft);
-        //        TextView textViewScore = findViewById(R.id.textViewScore);
+
         Random rand = new Random();
         currentColor = Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
         textViewLeft.setBackgroundColor(currentColor);
 
         new CountDownTimer(60000,2000){
             public void onTick(long millisUntilFinished){
-//                textViewRight.setText("seconds: " + millisUntilFinished / 2000);
                 guessColor = Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
                 textViewRight.setBackgroundColor(guessColor);
             }
             public void onFinish(){
-//                textViewScore.setText("score yes: " + scoreYes + " score no: " + scoreNo);
                 displayResult("All done: ");
-//                Button startBtn = (Button) findViewById(R.id.sendEmail);
-//                startBtn.setOnClickListener(new View.OnClickListener() {
-//                    public void onClick(View view) {
-//                        sendEmail();
-//                    }
-//                });
-
-
+                rating = scoreYes*10 + scoreNo;
             }
         }.start();
     }
@@ -110,24 +102,24 @@ public class GameActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.action_open_settings:
-                openFile(SHAPEFILE);
+                openFile();
                 return true;
             case R.id.action_save_settings:
-                saveFile(SHAPEFILE);
+                saveFile();
                 return true;
             default:
                 return true;
         }
     }
 
-    private void openFile(String fileName){
+    private void openFile(){
         try {
-            InputStream inputStream = openFileInput(fileName);
+            InputStream inputStream = openFileInput(SHAPEFILE);
             if (inputStream != null){
                 InputStreamReader isr = new InputStreamReader(inputStream);
                 BufferedReader reader = new BufferedReader(isr);
                 String line;
-                StringBuffer builder = new StringBuffer();
+                StringBuilder builder = new StringBuilder();
                 while ((line = reader.readLine()) != null){
                     builder.append(line + "\n");
                 }
@@ -138,7 +130,7 @@ public class GameActivity extends AppCompatActivity {
 
         } catch(Throwable t) {
             try {
-                OutputStream outputStream = openFileOutput(fileName, 0);
+                OutputStream outputStream = openFileOutput(SHAPEFILE, 0);
                 OutputStreamWriter osw = new OutputStreamWriter((outputStream));
                 osw.write(helpBox.getText().toString());
                 osw.close();
@@ -149,9 +141,9 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void saveFile(String fileName){
+    private void saveFile(){
         try {
-            OutputStream outputStream = openFileOutput(fileName, 0);
+            OutputStream outputStream = openFileOutput(SHAPEFILE, 0);
             OutputStreamWriter osw = new OutputStreamWriter(outputStream);
             osw.write(helpBox.getText().toString());
             osw.close();
@@ -191,10 +183,9 @@ public class GameActivity extends AppCompatActivity {
     public void toResult(View v){
 
         Intent intent = new Intent(this, ResultActivity.class);
-        intent.putExtra("name", name.toString());
-        intent.putExtra("email", email.toString());
+        intent.putExtra("name", name);
+        intent.putExtra("email", email);
+        intent.putExtra("rating", rating);
         startActivity(intent);
     }
-
-
 }

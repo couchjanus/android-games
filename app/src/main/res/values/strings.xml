@@ -6,5 +6,19 @@
     <string name="run_game">Start Game</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="rating">Rating</string>
+    <string name="show_data">Show data</string>
+    <string name="save_data">Save data</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="go_to_result">Go to result</string>
+    <string name="run_again">Run Again</string>
 
 </resources>

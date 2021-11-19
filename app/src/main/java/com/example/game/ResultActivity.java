@@ -2,6 +2,7 @@ package com.example.game;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity {
     String userName, userEmail;
+    int userRating = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,27 +21,43 @@ public class ResultActivity extends AppCompatActivity {
         if (arguments!=null){
             userName = arguments.get("name").toString();
             userEmail = arguments.get("email").toString();
+            userRating = Integer.parseInt(arguments.get("rating").toString());
         }
     }
 
     public void saveToDb(View view){
         SQLiteDatabase db = getBaseContext().openOrCreateDatabase("games.db", MODE_PRIVATE, null);
         db.execSQL("CREATE TABLE IF NOT EXISTS players (name TEXT, email TEXT, rate INTEGER, UNIQUE(name))");
-        db.execSQL("INSERT OR IGNORE INTO players VALUES('tom', 'tom@my.com', 5);");
+
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", userName);
+        contentValues.put("email", userEmail);
+        contentValues.put("rate", userRating);
+        db.insert("players", null, contentValues);
         db.close();
     }
 
     public void showResult(View view){
         SQLiteDatabase db = getBaseContext().openOrCreateDatabase("games.db", MODE_PRIVATE, null);
-        Cursor query = db.rawQuery("SELECT * FROM players", null);
+        Cursor query = db.rawQuery("SELECT * FROM players WHERE name='"+userName+"'", null);
 
-        TextView showData = findViewById(R.id.showData);
-        showData.setText("");
+        TextView showName = findViewById(R.id.showName);
+        TextView showEmail = findViewById(R.id.showEmail);
+        TextView showRating = findViewById(R.id.showRating);
+
+        showName.setText("");
+        showEmail.setText("");
+        showRating.setText("");
+
         while(query.moveToNext()){
             String name = query.getString(0);
             String email = query.getString(1);
             int rating = query.getInt(2);
-            showData.append("Name: " + name + " Email: " + email + " Tating: " + rating);
+            showName.append(name);
+            showEmail.append(email);
+            showRating.append(""+rating);
+
         }
         query.close();
         db.close();
