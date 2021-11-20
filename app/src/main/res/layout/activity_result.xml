@@ -54,4 +54,17 @@
         android:text="@string/save_data"
          />
     </TableRow>
+
+    <TableRow>
+        <Button
+            android:id="@+id/sendEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:onClick="sendResult"
+            android:text="Send Result To Email"
+            />
+
+
+    </TableRow>
 </TableLayout>

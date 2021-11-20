@@ -24,7 +24,7 @@ public class ReStartFragment extends Fragment {
         restart.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                ((GameActivity) getActivity()).run();
+                ((GameActivity) getActivity()).run(1);
             }
         });
 

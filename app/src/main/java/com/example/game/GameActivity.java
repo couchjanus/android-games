@@ -35,6 +35,7 @@ public class GameActivity extends AppCompatActivity {
     int guessColor;
     int scoreYes = 0;
     int scoreNo = 0;
+    int amount = 1;
     String name, email;
     int rating = 0;
 
@@ -58,24 +59,23 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-//        helpBox =  (TextView) findViewById(R.id.gameHelp);
-
         TextView textHeader = findViewById(R.id.header);
         textHeader.setText("Чи співпадає назва кольору зліва з кольором техта зправа?");
         Bundle arguments = getIntent().getExtras();
         if (arguments!=null){
             name = arguments.get("name").toString();
             email = arguments.get("email").toString();
+            amount = Integer.parseInt(arguments.get("amount").toString());
         }
-        run();
+        run(amount);
 
     }
 
-    public void run(){
+    public void run(int amount){
         TextView textViewRight = findViewById(R.id.textViewRight);
         TextView textViewLeft = findViewById(R.id.textViewLeft);
 
+        for (int i = 0; i < amount; i++){
         Random rand = new Random();
         currentColor = Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
         textViewLeft.setBackgroundColor(currentColor);
@@ -90,6 +90,7 @@ public class GameActivity extends AppCompatActivity {
                 rating = scoreYes*10 + scoreNo;
             }
         }.start();
+        }
     }
 
     @Override
@@ -153,31 +154,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    protected void sendEmail() {
-        Log.i("Send email", "Email message sended successfully");
 
-        String[] TO = {"couchjanus@gmail.com"};
-        String[] CC = {"janusnic@gmail.com"};
-        Intent emailIntent = new Intent(Intent.ACTION_SEND);
-        emailIntent.setData(Uri.parse("mailto:"));
-        emailIntent.setType("text/plain");
-
-
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-        emailIntent.putExtra(Intent.EXTRA_CC, CC);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
-
-        try {
-            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-            finish();
-            Log.i("Finished sending email", "Finished sending email");
-        } catch (android.content.ActivityNotFoundException ex) {
-
-            Toast.makeText(GameActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
-        }
-
-    }
 
 
     public void toResult(View v){

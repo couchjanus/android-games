@@ -19,6 +19,7 @@ import java.io.OutputStreamWriter;
 
 public class SettingActivity extends AppCompatActivity {
     TextView name, email;
+    EditText amount;
     private final static String FILENAME = "settings.txt";
     private EditText mEditText;
 
@@ -35,6 +36,7 @@ public class SettingActivity extends AppCompatActivity {
 
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
+        amount = findViewById(R.id.rounds);
 
         if (arguments!=null){
             name.setText(arguments.get("name").toString());
@@ -105,10 +107,10 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     public void runGame(View v){
-
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra("name", name.getText().toString());
         intent.putExtra("email", email.getText().toString());
+        intent.putExtra("amount", amount.getText().toString());
         startActivity(intent);
     }
 }

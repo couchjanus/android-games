@@ -20,5 +20,9 @@
     <string name="no">No</string>
     <string name="go_to_result">Go to result</string>
     <string name="run_again">Run Again</string>
+    <string name="game_setting">Game Setting</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_email">Your Email</string>
+    <string name="set_amount">Set amount</string>
 
 </resources>

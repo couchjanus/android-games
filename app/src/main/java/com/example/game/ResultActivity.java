@@ -2,12 +2,17 @@ package com.example.game;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ResultActivity extends AppCompatActivity {
     String userName, userEmail;
@@ -61,5 +66,36 @@ public class ResultActivity extends AppCompatActivity {
         }
         query.close();
         db.close();
+    }
+
+    public void sendResult(View view){
+        sendEmail();
+    }
+
+    @SuppressLint("IntentReset")
+    protected void sendEmail() {
+        Log.i("Send email", "Email message sended successfully");
+
+        String[] TO = {"couchjanus@gmail.com"};
+        String[] CC = {"janusnic@gmail.com"};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+
+
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            finish();
+            Log.i("Finished sending email", "Finished sending email");
+        } catch (android.content.ActivityNotFoundException ex) {
+
+            Toast.makeText(ResultActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
